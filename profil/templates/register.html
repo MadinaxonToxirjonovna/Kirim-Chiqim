@@ -1,0 +1,126 @@
+{% load static %}
+{% load i18n %}
+{% load widget_tweaks %}  
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Ro'yxatdan o'tish" %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a202c;
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            padding: 1.5rem;
+            color: #333;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        .register-box {
+            background-color: #2d3748; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 25px; 
+            padding: 3rem;
+            width: 100%;
+            max-width: 600px; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .register-box:hover {
+            transform: translateY(-10px);      
+            box-shadow: 0 20px 45px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #93c5fd;
+        }
+
+        .form-control {
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 0.75rem;
+            padding: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .form-error {
+            font-size: 0.875rem;
+            color: #dc3545;
+        }
+
+        .text-center a {
+            color: #93c5fd;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="register-box">
+    <h3 class="text-center mb-4 fw-bold" style="color: #93c5fd">{% trans "Ro'yxatdan o'tish" %}</h3>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{% trans field.label %}</label>
+                {% render_field field class="form-control" %}
+                {% if field.errors %}
+                    <div class="form-error">
+                        {{ field.errors|striptags }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary w-100">{% trans "Ro'yxatdan o'tish" %}</button>
+    </form>
+
+    <div class="mt-4 text-center text-white">
+        {% trans "Hisobingiz bormi?" %} <a href="{% url 'profil:login' %}">{% trans "Kirish" %}</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>📊 {% trans "Kirim Chiqim Hisoboti" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* To'q rangli, jiddiyroq orqa fon */
+        body {
+            background-color: #1a202c; /* To'q kulrang/qora fon */
+            color: #e2e8f0; /* Yengil kulrang matn */
+            font-family: 'Inter', sans-serif; /* Zamonaviyroq shrift variantini tavsiya qilaman */
+        }
+        /* Accordion effekti */
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .accordion-body.show {
+            max-height: 500px; /* Kontentga qarab moslang */
+        }
+        /* Karta va boshqa elementlar uchun soya va chegara */
+        .card-elegant {
+            background-color: #2d3748; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    </head>
+<body class="min-h-screen p-8">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-end gap-3 mb-6">
+            <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" name="language" value="uz" class="bg-gray-700 text-gray-200 font-medium px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">UZB</button>
+            </form>
+            <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" name="language" value="ru" class="bg-gray-700 text-gray-200 font-medium px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">RUS</button>
+            </form>
+            <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <button type="submit" name="language" value="en" class="bg-gray-700 text-gray-200 font-medium px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">ENG</button>
+            </form>
+        </div>
+
+        <div class="flex justify-between items-center mb-10 flex-wrap gap-6">
+            <h1 class="text-5xl font-extrabold text-blue-400 tracking-tight">{% trans "Hisobotlar Paneli" %}</h1>
+            <div class="flex space-x-4">
+                <a href="{% url 'profil:profil' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-7 rounded-xl shadow-md transition duration-300 transform hover:scale-105 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    {% trans "Profil" %}
+                </a>
+
+                <a href="{% url 'transactions:kirim_qosh' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-7 rounded-xl shadow-md transition duration-300 transform hover:scale-105 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    {% trans "Kirim qo'shish" %}
+                </a>
+                <a href="{% url 'transactions:chiqim_qosh' %}" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-7 rounded-xl shadow-md transition duration-300 transform hover:scale-105 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                    {% trans "Chiqim qo'shish" %}
+                </a>
+            </div>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="space-y-8">
+
+            <div class="card-elegant rounded-xl p-7">
+                <button onclick="toggleAccordion('haftalikBody')" class="w-full text-left text-2xl font-bold mb-4 text-blue-300 hover:text-blue-200 transition duration-200 flex justify-between items-center">
+                    <span>📈 {% trans "Haftalik Hisobot" %}</span>
+                    <svg id="haftalikIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="haftalikBody" class="accordion-body">
+                    {% if haftalik_hisobot %}
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Sana" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Kirim" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Chiqim" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800">
+                                {% for row in haftalik_hisobot %}
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ row.sana }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">{{ row.kirim|floatformat:2 }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">{{ row.chiqim|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <p class="text-center py-4 text-gray-400">{% trans "Haftalik hisobot mavjud emas" %}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card-elegant rounded-xl p-7">
+                <button onclick="toggleAccordion('oylikBody')" class="w-full text-left text-2xl font-bold mb-4 text-blue-300 hover:text-blue-200 transition duration-200 flex justify-between items-center">
+                    <span>🗓️ {% trans "Oylik Hisobot" %}</span>
+                    <svg id="oylikIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="oylikBody" class="accordion-body">
+                    {% if oylik %}
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Sana" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Kirim" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Chiqim" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800">
+                                {% for row in oylik %}
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ row.sana }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">{{ row.kirim|floatformat:2 }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">{{ row.chiqim|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <p class="text-center py-4 text-gray-400">{% trans "Oylik hisobot mavjud emas." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card-elegant rounded-xl p-7">
+                <button onclick="toggleAccordion('yillikBody')" class="w-full text-left text-2xl font-bold mb-4 text-blue-300 hover:text-blue-200 transition duration-200 flex justify-between items-center">
+                    <span> 🔄 {% trans "Yillik Hisobot" %}</span>
+                    <svg id="yillikIcon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="yillikBody" class="accordion-body">
+                    {% if yillik %}
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-700">
+                            <thead class="bg-gray-700">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Sana" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Kirim" %}</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">{% trans "Chiqim" %}</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-800">
+                                {% for row in yillik %}
+                                <tr class="hover:bg-gray-700 transition duration-150">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{{ row.sana }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">{{ row.kirim|floatformat:2 }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-red-400">{{ row.chiqim|floatformat:2 }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <p class="text-center py-4 text-gray-400">{% trans "Yillik hisobot mavjud emas." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+            <div class="text-center mt-12 text-3xl font-medium text-gray-300">
+                <p>{% trans "Hisobotlarni ko‘rish uchun iltimos" %} <a href="{% url 'profil:login' %}" class="underline text-blue-400 hover:text-blue-300 transition duration-300">{% trans "tizimga kiring" %}</a>.</p>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+        function toggleAccordion(id) {
+            const body = document.getElementById(id);
+            const icon = document.getElementById(id.replace('Body', 'Icon')); 
+            
+            body.classList.toggle("show");
+            
+            if (body.classList.contains("show")) {
+                icon.classList.add("rotate-180"); 
+                setTimeout(() => {
+                    body.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300); 
+            } else {
+                icon.classList.remove("rotate-180"); 
+            }
+        }
+    </script>
+</body>
+</html>

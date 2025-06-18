@@ -1,0 +1,174 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% trans "Valyuta qo'shish" %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #53354a);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 1.5rem;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(18px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      color: #93c5fd;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      margin-left: 150px;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid #93c5fd;
+      padding: 0.5rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #93c5fd;
+      color: #1a202c;
+    }
+
+    .example-text {
+      text-align: center;
+      font-style: italic;
+      color: #cddafd;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #c7d2fe;
+    }
+
+    input, textarea {
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-size: 1rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #d1d5db;
+    }
+
+    input:focus,
+    textarea:focus {
+      background-color: rgba(255, 255, 255, 0.3);
+      outline: none;
+      box-shadow: 0 0 0 2px #8c7ae6;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .btn-submit {
+      background-color: #8c7ae6;
+      color: #fff;
+      border: none;
+      padding: 0.85rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: #6c5dd3;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 1.5rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <a href="{% url 'transactions:hisob' %}" class="back-btn">⬅️ {% trans "Orqaga" %}</a>
+    <h2>💰 {% trans "Yangi valyuta qo'shish" %}</h2>
+    <div class="example-text">
+      {% trans "Namuna" %}: <strong>{% trans "name" %}:</strong> SO'M, <strong>{% trans "short" %}:</strong> UZS
+    </div>
+    <form method="POST">
+      {% csrf_token %}
+
+      <label for="name">{% trans "Valyuta nomi (to‘liq)" %}</label>
+      <input type="text" id="name" name="name" placeholder="{% trans 'Masalan: SO\'M' %}" required>
+
+
+      <label for="short">{% trans "Valyuta qisqartmasi" %}</label>
+      <input type="text" id="short" name="short" placeholder="{% trans 'Masalan: UZS' %}" maxlength="5" required>
+
+
+      <label for="symbol">{% trans "Valyuta belgisi (ixtiyoriy)" %}</label>
+      <input type="text" id="symbol" name="symbol" placeholder="{% trans 'Masalan: ₸ yoki $' %}" maxlength="3">
+
+
+      <label for="description">{% trans "Izoh (ixtiyoriy)" %}</label>
+      <textarea id="description" name="description" placeholder="{% trans "Qo‘shimcha ma’lumot yoki eslatma..." %}"></textarea>
+
+      <button type="submit" class="btn-submit">💾 {% trans "Saqlash" %}</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% trans "Chiqimlar" %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        /* Sizning mavjud CSS kodingiz o‘zgartirilmagan */
+        body {
+            background-color: #1a202c;
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            padding: 1.5rem;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #93c5fd;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .highlight-error {
+            border: 2px solid #dc3545 !important;
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            animation: pulseError 0.5s ease-in-out;
+        }
+
+        .highlight-note {
+            color: #b91c1c !important;
+            transform: scale(1.05);
+            animation: pulseNote 1s ease-in-out;
+        }
+
+        option.text-danger {
+            color: #dc3545 !important;
+        }
+
+        @keyframes pulseError {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulseNote {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.07); }
+            100% { transform: scale(1.05); }
+        }
+
+        .sticky-note {
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+            background-color: #fff;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container my-5">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <h2 class="text-primary">📋 {% trans "Chiqimlar" %}</h2>
+        
+        <div class="d-flex flex-wrap gap-2 mt-2">
+            <a href="{% url 'transactions:kurs_kirit' %}" class="btn btn-outline-primary">{% trans "Valyutalarni hisoblash" %}</a>
+            <a href="{% url 'transactions:hisob' %}" class="btn btn-outline-primary">{% trans "Hisobot" %}</a>
+            <a href="{% url 'transactions:kirim' %}" class="btn btn-outline-primary">{% trans "Kirimlar" %}</a>
+            <a href="{% url 'transactions:kirim' %}" class="btn btn-outline-primary">{% trans "Orqaga" %}</a>
+        </div>
+    </div>
+
+    <form method="get" action="{% url 'transactions:chiqim' %}" class="row gy-3 gx-3 align-items-end">
+        <div class="col-md-4">
+            <label for="start_date" class="form-label fw-semibold" style="color: #93c5fd;">{% trans "Boshlanish sanasi:" %}</label>
+            <input
+                type="date"
+                class="form-control"
+                name="start_date"
+                id="start_date"
+                value="{{ form.start_date.value }}"
+                placeholder="{% trans 'Boshlanish sanasi' %}"
+            />
+        </div>
+
+        <div class="col-md-4">
+            <label for="end_date" class="form-label fw-semibold" style="color: #93c5fd;">{% trans "Tugash sanasi:" %}</label>
+            <input
+                type="date"
+                class="form-control"
+                name="end_date"
+                id="end_date"
+                value="{{ form.end_date.value }}"
+                placeholder="{% trans 'Tugash sanasi' %}"
+            />
+        </div>
+
+        <div class="col-md-4 position-relative">
+            <label for="valuta" class="form-label fw-semibold" style="color: #93c5fd;">{% trans "Valyuta turi:" %} <span class="text-danger">*</span></label>
+            <select
+                id="valuta"
+                name="valuta"
+                class="form-select"
+                onchange="toggleHighlight(this)"
+                required
+            >
+                <option value="" class="text-danger" disabled selected>{% trans "Majburiy tanlov" %}</option>
+                {% for v in valyutalar %}
+                    <option value="{{ v.id }}" {% if request.GET.valuta == v.id|stringformat:"s" %}selected{% endif %}>
+                        {{ v.name }}
+                    </option>
+                {% empty %}
+                    <option disabled>{% trans "Hech narsa topilmadi" %}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="summa_type" class="form-label fw-semibold" style="color: #93c5fd;">{% trans "Summa turi:" %}</label>
+            <select id="summa_type" name="summa_type" class="form-select">
+                <option value="" {% if not request.GET.summa_type %}selected{% endif %}>{% trans "Barchasi" %}</option>
+                <option value="naqd" {% if request.GET.summa_type == "naqd" %}selected{% endif %}>{% trans "Naqd" %}</option>
+                <option value="plastik" {% if request.GET.summa_type == "plastik" %}selected{% endif %}>{% trans "Plastik" %}</option>
+                <option value="bank" {% if request.GET.summa_type == "bank" %}selected{% endif %}>{% trans "Bank" %}</option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="uchun" class="form-label fw-semibold" style="color: #93c5fd;">{% trans "Qayerga" %}:</label>
+            <select name="uchun" class="form-select">
+                <option value="" {% if not request.GET.uchun %}selected{% endif %}>{% trans "Barchasi" %}</option>
+                {% for uchun in uchun_choices %}
+                    <option value="{{ uchun.id }}" {% if request.GET.uchun == uchun.id|stringformat:"s" %}selected{% endif %}>{{ uchun }}</option>
+                {% empty %}
+                    <option disabled>{% trans "Hech narsa topilmadi" %}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg w-50">{% trans "Filtrlash" %}</button>
+        </div>
+    </form>
+
+    <div class="row text-center my-4">
+        <div class="col-md-6 mb-3 mb-md-0">
+            <div class="alert alert-danger fs-5">
+                ❌ <strong>{% trans "Jami Chiqim:" %}</strong> {{ jami_chiqim }} {% if valuta %}{{ valuta.short }}{% endif %}
+            </div>
+        </div>
+        {% if valuta == None %}
+        <div class="col-md-6">
+            <div class="alert alert-info fs-5">
+                {% trans "Valyutalar aralash. Hisoblash uchun" %} <strong>{% trans "Valyutalarni hisoblash" %}</strong> {% trans "bo‘limiga o‘ting." %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-danger text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">{% trans "Chiqimlar" %}</h5>
+            <a href="{% url 'transactions:chiqim_qosh' %}" class="btn btn-light btn-sm">+ {% trans "Qo'shish" %}</a>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover m-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>{% trans "Qayerga" %}</th>
+                            <th>{% trans "Summa" %}</th>
+                            <th>{% trans "Valyuta" %}</th>
+                            <th>{% trans "Summa turi" %}</th>
+                            <th>{% trans "Sana" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for chiqim in chiqimlar %}
+                            <tr>
+                                <td>{{ chiqim.uchun }}</td>
+                                <td>{{ chiqim.summa }}</td>
+                                <td>{{ chiqim.valuta.short }}</td>
+                                <td>{{ chiqim.summa_type }}</td>
+                                <td>{{ chiqim.sana }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center fst-italic">{% trans "Chiqimlar mavjud emas" %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-danger text-white">
+            <h5 class="mb-0">{% trans "Valyutalar kesimida (faqat sana bo‘yicha filterlanadi)" %}</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover m-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>{% trans "Valyuta" %}</th>
+                            <th>{% trans "Summa" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a, b in dic.items %}
+                            <tr>
+                                <td>{{ a }}</td>
+                                <td>{{ b }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="2" class="text-center fst-italic">{% trans "Chiqimlar mavjud emas" %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleHighlight(select) {
+        const parentDiv = select.closest('.col-md-4');
+        const noteDiv = document.querySelector('.eslatma');
+        if (select.value === "") {
+            parentDiv.classList.add('highlight-error');
+            noteDiv.classList.add('highlight-note');
+        } else {
+            parentDiv.classList.remove('highlight-error');
+            noteDiv.classList.remove('highlight-note');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const select = document.querySelector('select[name="valuta"]');
+        if (select) toggleHighlight(select);
+    });
+</script>
+</body>
+</html>

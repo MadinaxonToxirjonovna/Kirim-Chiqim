@@ -1,0 +1,422 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: KirimChiqim 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-13 16:38+0500\n"
+"PO-Revision-Date: 2025-06-18 12:00+0500\n"
+"Last-Translator: Madinaxon Maxmudova <madinaxontoxirjonovna@gmail.com>\n"
+"Language-Team: Russian Team <ru@example.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\hisobot\settings.py:151
+msgid "O‘zbek"
+msgstr ""
+
+#: .\hisobot\settings.py:152
+msgid "Rus" 
+msgstr ""
+
+#: .\hisobot\settings.py:153
+msgid "Ingliz"
+msgstr ""
+
+#: .\home\templates\contact.html:6
+msgid "Biz bilan bog‘lanish"
+msgstr "Связаться с нами"
+
+#: templates/your_template.html:10
+msgid "Hisobotlar Paneli"
+msgstr "Панель отчетов"
+
+#: templates/your_template.html:20
+msgid "Oylik hisobot mavjud emas."
+msgstr "Месячный отчет отсутствует."
+
+#: templates/your_template.html:30
+msgid "Yillik hisobot mavjud emas."
+msgstr "Годовой отчет отсутствует."
+
+#: templates/your_template.html:2
+msgid "Yangi chiqim qo'shish"
+msgstr "Добавить новый расход"
+
+msgid "Yangi kirim qo'shish"
+msgstr "Добавить новый доход"
+
+msgid "Kimdan"
+msgstr "От кого"
+
+msgid "Summa turi:"
+msgstr "Вид суммы:"
+
+msgid "Qayerdan:"
+msgstr "Откуда:"
+
+msgid "Har xil turdagi valyutalarni umumiy hisoblab bo‘lmaydi."
+msgstr "Невозможно посчитать общую сумму для разных типов валют."
+
+msgid "Valyutalarni hisoblash bo‘limiga o‘ting yoki filtrlang."
+msgstr "Перейдите в раздел расчета валют или используйте фильтр."
+
+msgid "Kirimlar"
+msgstr "Доходы"
+
+msgid "Summa turi"
+msgstr "Тип суммы"
+
+msgid "Filtrlash"
+msgstr "Фильтровать"
+
+#: templates/your_template.html:5
+msgid "Valyuta qo‘shish"
+msgstr "Добавить валюту"
+
+#: templates/your_template.html:6
+msgid "Kategoriya qo‘shish"
+msgstr "Добавить категорию"
+
+#: templates/your_template.html:7
+msgid "Orqaga"
+msgstr "Назад"
+
+#: templates/your_template.html:12
+msgid "Sana"
+msgstr "Дата"
+
+#: templates/your_template.html:17
+msgid "Summasi"
+msgstr "Сумма"
+
+#: templates/your_template.html:22
+msgid "Miqdor kiriting"
+msgstr "Введите сумму"
+
+#: templates/your_template.html:27
+msgid "Kategoriya"
+msgstr "Категория"
+
+#: templates/your_template.html:29
+msgid "Kategoriya tanlang"
+msgstr "Выберите категорию"
+
+#: templates/your_template.html:30
+msgid "Ish"
+msgstr "Работа"
+
+#: templates/your_template.html:31
+msgid "Sotuv"
+msgstr "Продажа"
+
+#: templates/your_template.html:32
+msgid "Boshqa"
+msgstr "Другое"
+
+msgid "Hisobotingizni valyuta va sanaga qarab filtrlash mumkin"
+msgstr "Вы можете фильтровать отчёт по валюте и дате"
+
+msgid "Boshlanish sanasi"
+msgstr "Дата начала"
+
+msgid "Tugash sanasi"
+msgstr "Дата окончания"
+
+msgid "Ko'rish"
+msgstr "Посмотреть"
+
+msgid "Qo'shish"
+msgstr "Добавить"
+
+msgid "Tanlang"
+msgstr "Выберите"
+
+msgid "Turi"
+msgstr "Тип"
+
+msgid "Ma'lumot yo'q"
+msgstr "Нет данных"
+
+#: templates/your_template.html:39
+msgid "Valyuta tanlang"
+msgstr "Выберите валюту"
+
+#: templates/your_template.html:45
+msgid "Izoh"
+msgstr "Примечание"
+
+#: templates/your_template.html:46
+msgid "Qo‘shimcha ma’lumot yozing..."
+msgstr "Введите дополнительную информацию..."
+
+#: templates/your_template.html:50
+msgid "Saqlash"
+msgstr "Сохранить"
+
+#: .\home\templates\contact.html:58
+msgid "Taklif va murojaat uchun:"
+msgstr "Предложения и связь:"
+
+#: .\home\templates\home.html:7 .\home\templates\home.html:64
+msgid "Umumiy Hisobot"
+msgstr "Общий отчет"
+
+#: .\home\templates\home.html:67
+msgid "Valyutalarni hisoblash"
+msgstr "Рассчитать валюты"
+
+#: .\home\templates\home.html:68
+msgid "Chiqim qo'shish"
+msgstr "Добавить расход"
+
+#: .\home\templates\home.html:69
+msgid "Kirim qo'shish"
+msgstr "Добавить доход"
+
+#: .\home\templates\home.html:70
+msgid "Hisobot"
+msgstr "Отчет"
+
+#: .\home\templates\home.html:71
+msgid "Profil"
+msgstr "Профиль"
+
+#: .\templates\base.html:20
+msgid "Bog'lanish"
+msgstr "Связаться с нами"
+
+#: .\home\templates\home.html:190
+msgid "Haftalik Hisobot"
+msgstr "Еженедельный отчет"
+
+#: .\home\templates\home.html:206
+msgid "Haftalik hisobot mavjud emas"
+msgstr "Еженедельный отчет отсутствует"
+
+#: .\home\templates\home.html:214
+msgid "Haftalik sahifalash"
+msgstr "Постраничная навигация по неделям"
+
+#: .\home\templates\home.html:85 
+#: .\home\templates\home.html:193
+msgid "Ko‘rsatish/Yashirish"
+msgstr "Показать/Скрыть"
+
+#: .\home\templates\home.html:94 .\home\templates\home.html:132
+
+#: .\home\templates\home.html:95 .\home\templates\home.html:133
+#: .\home\templates\home.html:203
+msgid "Kirim"
+msgstr "Доход"
+
+#: .\home\templates\home.html:96 .\home\templates\home.html:134
+
+
+#: .\home\templates\home.html:121
+msgid "Oylik Hisobot"
+msgstr "Ежемесячный отчет"
+
+#: .\home\templates\home.html:146
+msgid "Oylik hisobot mavjud emas"
+msgstr "Ежемесячный отчет отсутствует"
+
+#: .\home\templates\home.html:154
+msgid "Oylik sahifalash"
+msgstr "Постраничная навигация по месяцам"
+
+#: .\home\templates\home.html:158 .\home\templates\home.html:228
+msgid "Oldingi"
+msgstr "Назад"
+
+#: .\home\templates\home.html:174 .\home\templates\home.html:244
+msgid "Keyingi"
+msgstr "Вперед"
+
+#: .\home\templates\home.html:160
+msgid "Yillik Hisobot"
+msgstr "Годовой отчет"
+
+#: .\home\templates\home.html:176
+msgid "Yillik hisobot mavjud emas"
+msgstr "Годовой отчет отсутствует"
+
+#: .\home\templates\home.html:184
+msgid "Yillik sahifalash"
+msgstr "Постраничная навигация по годам"
+
+#: .\home\templates\home.html:261
+msgid "Iltimos, hisobotlarni ko‘rish uchun"
+msgstr "Пожалуйста, чтобы просматривать отчеты"
+
+#: .\home\templates\home.html:261
+msgid "Tizimga kiring"
+msgstr "Bойдите в систему"
+
+msgid "Eslatma:"
+msgstr "Примечание:"
+
+msgid "Boshqa valyutadagi hisobotni ko'rish uchun filterlashdan foydalaning"
+msgstr "Используйте фильтрацию, чтобы просмотреть отчеты в других валютах."
+
+#: .\home\templates\home.html:123
+msgid "Bosh sahifa"
+msgstr "Главная страница"
+
+msgid "Boshlanish sanasi:"
+msgstr "Дата начала:"
+
+msgid "Tugash sanasi:"
+msgstr "Дата окончания:"
+
+msgid "Valyuta turi:"
+msgstr "Тип валюты:"
+
+msgid "Majburiy"
+msgstr "Обязательно"
+
+msgid "Hech narsa topilmadi"
+msgstr "Ничего не найдено"
+
+
+msgid "Barchasi"
+msgstr "Все"
+
+msgid "Naqd"
+msgstr "Наличные"
+
+msgid "Plastik"
+msgstr "Пластик"
+
+msgid "Bank"
+msgstr "Банк"
+
+msgid "Jami Kirim:"
+msgstr "Общий доход:"
+msgid "Jami Chiqim:"
+msgstr "Общий расход:"
+msgid "Balans:"
+msgstr "Баланс:"
+
+msgid "Summa"
+msgstr "Сумма"
+
+msgid "Valyuta"
+msgstr "Валюта"
+
+msgid "Kirimlar mavjud emas"
+msgstr "Нет доходов"
+
+msgid "Chiqimlar"
+msgstr "Расходы"
+msgid "Qayerga"
+msgstr "Куда"
+
+msgid "Chiqimlar mavjud emas"
+msgstr "Нет расходов"
+
+msgid "Foydalanuvchi:"
+msgstr "Пользователь:"
+
+msgid "Telefon:"
+msgstr "Телефон:"
+
+msgid "Manzil:"
+msgstr "Адрес:"
+
+msgid "Email:"
+msgstr "Электронная почта:"
+
+#: .\profil\views.py:89
+msgid "Profil ma’lumotlari topilmadi!"
+msgstr "Данные профиля не найдены!"
+msgid "Valyuta kurslarini kiriting"
+msgstr "Введите курсы валют"
+
+msgid "Asosiy valyuta:"
+msgstr "Базовая валюта:"
+msgid "Hisoblash"
+msgstr "Рассчитать"
+
+msgid "Yangi valyuta qo'shish"
+msgstr "Добавить новую валюту"
+
+msgid "Masalan: UZS"
+msgstr "Например: UZS"
+
+msgid "Masalan: ₸ yoki $"
+msgstr "Например: ₸ или $"
+
+msgid "Namuna"
+msgstr "Пример"
+
+msgid "SO'M"
+msgstr "СУМ"
+
+msgid "Valyuta nomi (to‘liq)"
+msgstr "Полное название валюты"
+
+msgid "Valyuta qisqartmasi"
+msgstr "Сокращение валюты"
+
+msgid "UZS"
+msgstr "UZS"
+
+msgid "Valyuta belgisi (ixtiyoriy)"
+msgstr "Символ валюты (необязательно)"
+
+msgid "yoki"
+msgstr "или"
+
+msgid "Izoh (ixtiyoriy)"
+msgstr "Комментарий (необязательно)"
+
+msgid "short"
+msgstr "сокращение"
+
+msgid "Valyutalar kesimida (faqat sana bo‘yicha filterlanadi)"
+msgstr "По валютам (фильтрация только по дате)"
+msgid "Majburiy tanlov"
+msgstr "Обязательный выбор"
+
+msgid "Valyutalar aralash. Hisoblash uchun Valyutalarni hisoblash bo‘limiga o‘ting."
+msgstr "Mixed currencies. Go to the 'Currency Calculation' section for calculation."
+
+msgid "Taklif va murojaat uchun"
+msgstr "Для предложений и обращений"
+
+msgid "Kirish"
+msgstr "Войти"
+
+msgid "Ro‘yxatdan o‘tish"
+msgstr "Зарегистрироваться"
+
+msgid "Telefon raqami"
+msgstr "Номер телефона"
+
+msgid "Parol"
+msgstr "Пароль"
+
+msgid "Ism"
+msgstr "Имя"
+
+msgid "Hisobingiz yo'qmi?"
+msgstr "У вас нет аккаунта?"
+
+msgid "Profilni yangilash"
+msgstr "Обновить профиль"
+
+msgid "Profil rasmi"
+msgstr "Фото профиля"
+
+msgid "Yangilash"
+msgstr "Обновить"

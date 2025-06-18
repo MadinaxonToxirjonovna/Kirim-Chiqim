@@ -1,0 +1,246 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-13 16:36+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\hisobot\settings.py:151
+msgid "O‘zbek"
+msgstr ""
+
+#: .\hisobot\settings.py:152
+msgid "Rus"
+msgstr ""
+
+#: .\hisobot\settings.py:153
+msgid "Ingliz"
+msgstr ""
+
+#: .\home\templates\contact.html:6
+msgid "Biz bilan bog‘lanish"
+msgstr ""
+
+#: .\home\templates\contact.html:58
+msgid "Taklif va murojaat uchun:"
+msgstr "Taklif va murojaat uchun:"
+
+#: .\home\templates\contact.html:72
+msgid "Orqaga"
+msgstr "Orqaga"
+
+#: .\home\templates\home.html:7 .\home\templates\home.html:64
+msgid "Umumiy Hisobot"
+msgstr "Umumiy Hisobot"
+
+#: .\home\templates\home.html:67
+msgid "Valyutalarni hisoblash"
+msgstr "Valyutalarni hisoblash"
+
+#: .\home\templates\home.html:68
+msgid "Chiqim qo'shish"
+msgstr "Chiqim qo'shish"
+
+#: .\home\templates\home.html:69
+msgid "Kirim qo'shish"
+msgstr "Kirim qo'shish"
+
+#: .\home\templates\home.html:70
+msgid "Hisobot"
+msgstr "Hisobot"
+
+#: .\home\templates\home.html:71
+msgid "Profil"
+msgstr "Profil"
+
+#: .\home\templates\home.html:72
+msgid "Bog'lanish"
+msgstr "Bog'lanish"
+
+#: .\home\templates\home.html:83
+msgid "Haftalik Hisobot"
+msgstr "Haftalik Hisobot"
+
+#: .\home\templates\home.html:85 .\home\templates\home.html:123
+#: .\home\templates\home.html:193
+msgid "Ko‘rsatish/Yashirish"
+msgstr "Ko‘rsatish/Yashirish"
+
+#: .\home\templates\home.html:94 .\home\templates\home.html:132
+#: .\home\templates\home.html:202
+msgid "Sana"
+msgstr "Sana"
+
+#: .\home\templates\home.html:95 .\home\templates\home.html:133
+#: .\home\templates\home.html:203
+msgid "Kirim"
+msgstr "Kirim"
+
+#: .\home\templates\home.html:96 .\home\templates\home.html:134
+#: .\home\templates\home.html:204
+msgid "Chiqim"
+msgstr "Chiqim"
+
+#: .\home\templates\home.html:108
+msgid "Haftalik hisobot mavjud emas"
+msgstr "Haftalik hisobot mavjud emas"
+
+#: .\home\templates\home.html:121
+msgid "Oylik Hisobot"
+msgstr "Oylik Hisobot"
+
+#: .\home\templates\home.html:146
+msgid "Oylik hisobot mavjud emas"
+msgstr "Oylik hisobot mavjud emas"
+
+#: .\home\templates\home.html:154
+msgid "Oylik sahifalash"
+msgstr "Oylik sahifalash"
+
+#: .\home\templates\home.html:158 .\home\templates\home.html:228
+msgid "Oldingi"
+msgstr "Oldingi"
+
+#: .\home\templates\home.html:174 .\home\templates\home.html:244
+msgid "Keyingi"
+msgstr "Keyingi"
+
+#: .\home\templates\home.html:191
+msgid "Yillik Hisobot"
+msgstr "Yillik Hisobot"
+
+#: .\home\templates\home.html:216
+msgid "Yillik hisobot mavjud emas"
+msgstr "Yillik hisobot mavjud emas"
+
+#: .\home\templates\home.html:224
+msgid "Yillik sahifalash"
+msgstr "Yillik sahifalash"
+
+#: .\home\templates\home.html:261
+msgid "Iltimos, hisobotlarni ko‘rish uchun"
+msgstr "Iltimos, hisobotlarni ko‘rish uchun"
+
+#: .\home\templates\home.html:261
+msgid "tizimga kiring"
+msgstr "tizimga kiring"
+
+msgid "Eslatma:"
+msgstr "Eslatma:"
+
+msgid "boshqa valyutadagi hisobotni ko'rish uchun filterlashdan foydalaning"
+msgstr "boshqa valyutadagi hisobotni ko'rish uchun filterlashdan foydalaning"
+
+msgid "Bosh sahifa"
+msgstr "Bosh sahifa"
+
+msgid "Boshlanish sanasi:"
+msgstr "Boshlanish sanasi:"
+
+msgid "Tugash sanasi:"
+msgstr "Tugash sanasi:"
+
+msgid "Valyuta turi:"
+msgstr "Valyuta turi:"
+
+msgid "Majburiy"
+msgstr "Majburiy"
+
+msgid "Hech narsa topilmadi"
+msgstr "Hech narsa topilmadi"
+
+msgid "Summa turi:"
+msgstr "Summa turi:"
+
+msgid "Barchasi"
+msgstr "Barchasi"
+
+msgid "Naqd"
+msgstr "Naqd"
+
+msgid "Plastik"
+msgstr "Plastik"
+
+msgid "Bank"
+msgstr "Bank"
+
+msgid "Filtrlash"
+msgstr "Filtrlash"
+
+msgid "Jami Kirim:"
+msgstr "Jami Kirim:"
+
+msgid "Jami Chiqim:"
+msgstr "Jami Chiqim:"
+
+msgid "Balans:"
+msgstr "Balans:"
+
+msgid "Kirimlar"
+msgstr "Kirimlar"
+
+msgid "Ko'rish"
+msgstr "Ko‘rish"
+
+msgid "+ Qo‘shish"
+msgstr "+ Qo‘shish"
+
+msgid "Qayerdan"
+msgstr "Qayerdan"
+
+msgid "Summa"
+msgstr "Summa"
+
+msgid "Valyuta"
+msgstr "Valyuta"
+
+msgid "Kirimlar mavjud emas"
+msgstr "Kirimlar mavjud emas"
+
+msgid "Chiqimlar"
+msgstr "Chiqimlar"
+
+msgid "Qayerga"
+msgstr "Qayerga"
+
+msgid "Chiqimlar mavjud emas"
+msgstr "Chiqimlar mavjud emas"
+
+
+msgid "Foydalanuvchi:"
+msgstr "Foydalanuvchi:"
+
+msgid "Telefon:"
+msgstr "Telefon:"
+
+msgid "Manzil:"
+msgstr "Manzil:"
+
+msgid "Email:"
+msgstr "Email:"
+
+msgid "Profil ma’lumotlari topilmadi!"
+msgstr "Profil ma’lumotlari topilmadi!"
+
+msgid "Valyuta kurslarini kiriting"
+msgstr "Valyuta kurslarini kiriting"
+
+msgid "Asosiy valyuta:"
+msgstr "Asosiy valyuta:"
+
+msgid "Hisoblash"
+msgstr "Hisoblash"
+

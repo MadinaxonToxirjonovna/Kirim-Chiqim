@@ -1,0 +1,358 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-13 16:38+0500\n"
+"PO-Revision-Date: 2025-06-18 12:00+0500\n"
+"Last-Translator: Madinaxon Maxmudova <madinaxontoxirjonovna@gmail.com>\n"
+"Language-Team: Russian Team <en@example.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+
+#: .\hisobot\settings.py:151
+msgid "O‘zbek"
+msgstr "Uzbek"
+
+#: .\hisobot\settings.py:152
+msgid "Rus"
+msgstr "Russian"
+
+#: .\hisobot\settings.py:153
+msgid "Ingliz"
+msgstr "English"
+
+msgid "Biz bilan bog‘lanish"
+msgstr "Contact us"
+
+msgid "Hisobotlar Paneli"
+msgstr "Reports Panel"
+
+msgid "Oylik hisobot mavjud emas."
+msgstr "Monthly report is not available."
+
+msgid "Yillik hisobot mavjud emas."
+msgstr "Annual report is not available."
+
+msgid "Yangi chiqim qo'shish"
+msgstr "Add new expense"
+
+msgid "Yangi kirim qo'shish"
+msgstr "Add new income"
+
+msgid "Kimdan"
+msgstr "From whom"
+
+msgid "Summa turi:"
+msgstr "Amount type:"
+
+msgid "Qayerdan:"
+msgstr "From where:"
+
+msgid "Har xil turdagi valyutalarni umumiy hisoblab bo‘lmaydi."
+msgstr "Cannot calculate total for different types of currencies."
+
+msgid "Valyutalarni hisoblash bo‘limiga o‘ting yoki filtrlang."
+msgstr "Go to the currency calculation section or use a filter."
+
+msgid "Kirimlar"
+msgstr "Incomes"
+
+msgid "Summa turi"
+msgstr "Amount type"
+
+msgid "Filtrlash"
+msgstr "Filter"
+
+msgid "Valyuta qo‘shish"
+msgstr "Add currency"
+
+msgid "Kategoriya qo‘shish"
+msgstr "Add category"
+
+msgid "Orqaga"
+msgstr "Back"
+
+msgid "Sana"
+msgstr "Date"
+
+msgid "Summasi"
+msgstr "Amount"
+
+msgid "Miqdor kiriting"
+msgstr "Enter amount"
+
+msgid "Kategoriya"
+msgstr "Category"
+
+msgid "Kategoriya tanlang"
+msgstr "Select category"
+
+msgid "Ish"
+msgstr "Work"
+
+msgid "Sotuv"
+msgstr "Sales"
+
+msgid "Boshqa"
+msgstr "Other"
+
+msgid "Hisobotingizni valyuta va sanaga qarab filtrlash mumkin"
+msgstr "You can filter your report by currency and date"
+
+msgid "Boshlanish sanasi"
+msgstr "Start date"
+
+msgid "Tugash sanasi"
+msgstr "End date"
+
+msgid "Ko'rish"
+msgstr "View"
+
+msgid "Qo'shish"
+msgstr "Add"
+
+msgid "Tanlang"
+msgstr "Choose"
+
+msgid "Turi"
+msgstr "Type"
+
+msgid "Ma'lumot yo'q"
+msgstr "No data"
+
+msgid "Valyuta tanlang"
+msgstr "Select currency"
+
+msgid "Izoh"
+msgstr "Note"
+
+msgid "Qo‘shimcha ma’lumot yozing..."
+msgstr "Enter additional information..."
+
+msgid "Saqlash"
+msgstr "Save"
+
+msgid "Taklif va murojaat uchun:"
+msgstr "For suggestions and inquiries:"
+
+msgid "Umumiy Hisobot"
+msgstr "General Report"
+
+msgid "Valyutalarni hisoblash"
+msgstr "Currency Calculation"
+msgid "Chiqim qo'shish"
+msgstr "Add Expense"
+
+msgid "Kirim qo'shish"
+msgstr "Add Income"
+
+msgid "Hisobot"
+msgstr "Report"
+
+msgid "Profil"
+msgstr "Profile"
+
+msgid "Bog'lanish"
+msgstr "Contact"
+msgid "Haftalik Hisobot"
+msgstr "Weekly Report"
+
+msgid "Haftalik hisobot mavjud emas"
+msgstr "Weekly report is not available"
+
+msgid "Haftalik sahifalash"
+msgstr "Weekly Pagination"
+
+msgid "Ko‘rsatish/Yashirish"
+msgstr "Show/Hide"
+
+msgid "Kirim"
+msgstr "Income"
+
+msgid "Oylik Hisobot"
+msgstr "Monthly Report"
+msgid "Oylik hisobot mavjud emas"
+msgstr "Monthly report is not available"
+
+msgid "Oylik sahifalash"
+msgstr "Monthly Pagination"
+
+msgid "Oldingi"
+msgstr "Previous"
+
+msgid "Keyingi"
+msgstr "Next"
+
+msgid "Yillik Hisobot"
+msgstr "Annual Report"
+msgid "Yillik hisobot mavjud emas"
+msgstr "Annual report is not available"
+
+msgid "Yillik sahifalash"
+msgstr "Annual Pagination"
+msgid "Iltimos, hisobotlarni ko‘rish uchun"
+msgstr "Please, to view the reports"
+
+msgid "Tizimga kiring"
+msgstr "Log in"
+
+msgid "Eslatma:"
+msgstr "Note:"
+
+msgid "Boshqa valyutadagi hisobotni ko'rish uchun filterlashdan foydalaning"
+msgstr "Use filtering to view the report in another currency."
+
+msgid "Bosh sahifa"
+msgstr "Home"
+
+msgid "Boshlanish sanasi:"
+msgstr "Start date:"
+
+msgid "Tugash sanasi:"
+msgstr "End date:"
+
+msgid "Valyuta turi:"
+msgstr "Currency type:"
+
+msgid "Majburiy"
+msgstr "Required"
+
+msgid "Hech narsa topilmadi"
+msgstr "Nothing found"
+
+msgid "Barchasi"
+msgstr "All"
+
+msgid "Naqd"
+msgstr "Cash"
+
+msgid "Plastik"
+msgstr "Card"
+
+msgid "Bank"
+msgstr "Bank"
+
+msgid "Jami Kirim:"
+msgstr "Total Income:"
+msgid "Jami Chiqim:"
+msgstr "Total Expense:"
+msgid "Balans:"
+msgstr "Balance:"
+
+msgid "Summa"
+msgstr "Amount"
+
+msgid "Valyuta"
+msgstr "Currency"
+
+msgid "Kirimlar mavjud emas"
+msgstr "No incomes"
+
+msgid "Chiqimlar"
+msgstr "Expenses"
+
+msgid "Qayerga"
+msgstr "To where"
+
+msgid "Chiqimlar mavjud emas"
+msgstr "No expenses"
+
+msgid "Foydalanuvchi:"
+msgstr "User:"
+
+msgid "Telefon:"
+msgstr "Phone:"
+
+msgid "Manzil:"
+msgstr "Address:"
+
+msgid "Profil ma’lumotlari topilmadi!"
+msgstr "Profile data not found!"
+
+msgid "Valyuta kurslarini kiriting"
+msgstr "Enter currency rates"
+
+msgid "Asosiy valyuta:"
+msgstr "Base currency:"
+msgid "Hisoblash"
+msgstr "Calculate"
+
+msgid "Yangi valyuta qo'shish"
+msgstr "Add new currency"
+
+msgid "Masalan: UZS"
+msgstr "Example: UZS"
+
+msgid "Masalan: ₸ yoki $"
+msgstr "Example: ₸ or $"
+
+msgid "Namuna"
+msgstr "Example"
+
+msgid "SO'M"
+msgstr "SUM"
+
+msgid "Valyuta nomi (to‘liq)"
+msgstr "Currency name (full)"
+
+msgid "Valyuta qisqartmasi"
+msgstr "Currency abbreviation"
+
+msgid "Valyuta belgisi (ixtiyoriy)"
+msgstr "Currency symbol (optional)"
+
+msgid "yoki"
+msgstr "or"
+
+msgid "Izoh (ixtiyoriy)"
+msgstr "Note (optional)"
+
+msgid "Valyutalar kesimida (faqat sana bo‘yicha filterlanadi)"
+msgstr "By currency (filtered only by date)"
+
+msgid "Majburiy tanlov"
+msgstr "Mandatory selection"
+msgid "Valyutalar aralash. Hisoblash uchun Valyutalarni hisoblash bo‘limiga o‘ting."
+msgstr "Mixed currencies. Go to the 'Currency Calculation' section for calculation."
+msgid "Taklif va murojaat uchun"
+msgstr "For suggestions and inquiries"
+
+msgid "Hisobingiz bormi?"
+msgstr "Do you already have an account?"
+
+msgid "Kirish"
+msgstr "Log in"
+
+msgid "Ro‘yxatdan o‘tish"
+msgstr "Register"
+
+msgid "Telefon raqami"
+msgstr "Phone number"
+
+msgid "Parol"
+msgstr "Password"
+
+msgid "Ism"
+msgstr "Username"
+
+msgid "Hisobingiz yo'qmi?"
+msgstr "Don't have an account?"
+
+msgid "Profilni yangilash"
+msgstr "Update Profile"
+
+msgid "Profil rasmi"
+msgstr "Profile Picture"
+
+msgid "Yangilash"
+msgstr "Update"
