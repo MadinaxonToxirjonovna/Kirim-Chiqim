@@ -27,111 +27,48 @@ def is_user_profile_completed(user):
         return False
 
 
-@login_required
+
 def hisob(request):
-    if not is_user_profile_completed(request.user):
-        messages.error(request, "Profilingiz to'liq emas. Iltimos, avval profilingizni to'ldiring.")
-        return redirect('profil:complete_profile') 
-    
-    try:
-        user_profile = Profil.objects.get(user=request.user)
-        base_currency = user_profile.currency 
-    except Profil.DoesNotExist:
-        messages.error(request, "Profil topilmadi. Qayta urinib ko'ring.")
-        return redirect('profil:complete_profile') 
-    except AttributeError:
-        messages.warning(request, "Asosiy valyuta belgilanmagan. Iltimos, profil sozlamalarini tekshiring.")
-        base_currency = None
+    valyutalar = Valyuta.objects.all()
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    valyuta_id = request.GET.get('valuta')
 
-  
-    start_date_str = request.GET.get('start_date')
-    end_date_str = request.GET.get('end_date')
-    selected_valuta_id = request.GET.get('valuta')
-    selected_summa_type = request.GET.get('summa_type') 
-    selected_kimdan_id = request.GET.get('kimdan') 
-
-    
-    if start_date_str:
-        try:
-            start_date = timezone.datetime.strptime(start_date_str, '%Y-%m-%d').date()
-        except ValueError:
-            start_date = None 
-    else:
-        start_date = timezone.now().date().replace(day=1) 
-
-    if end_date_str:
-        try:
-            end_date = timezone.datetime.strptime(end_date_str, '%Y-%m-%d').date()
-        except ValueError:
-            end_date = None 
-    else:
-        end_date = timezone.now().date() 
-
-    all_valyutalar = Valyuta.objects.filter(user=request.user) 
-    selected_valuta_obj = None 
-    
-    kimdan_options = Kimdan.objects.filter(user=request.user) 
-    selected_kimdan_obj = None
-
-    filtered_kirimlar = Kirim.objects.filter(user=request.user)
-    filtered_chiqimlar = Chiqim.objects.filter(user=request.user)
+    kirimlar = Kirim.objects.all()
+    chiqimlar = Chiqim.objects.all()
 
     if start_date:
-        filtered_kirimlar = filtered_kirimlar.filter(sana__gte=start_date)
-        filtered_chiqimlar = filtered_chiqimlar.filter(sana__gte=start_date)
+        kirimlar = kirimlar.filter(sana__gte=start_date)
+        chiqimlar = chiqimlar.filter(sana__gte=start_date)
     if end_date:
-        filtered_kirimlar = filtered_kirimlar.filter(sana__lte=end_date)
-        filtered_chiqimlar = filtered_chiqimlar.filter(sana__lte=end_date)
-    
-    if selected_valuta_id:
-        try:
-            selected_valuta_obj = Valyuta.objects.get(id=selected_valuta_id, user=request.user)
-            filtered_kirimlar = filtered_kirimlar.filter(valuta=selected_valuta_obj)
-            filtered_chiqimlar = filtered_chiqimlar.filter(valuta=selected_valuta_obj)
-        except Valyuta.DoesNotExist:
-            messages.warning(request, "Tanlangan valyuta topilmadi.")
-            selected_valuta_obj = None
+        kirimlar = kirimlar.filter(sana__lte=end_date)
+        chiqimlar = chiqimlar.filter(sana__lte=end_date)
+    if valyuta_id:
+        kirimlar = kirimlar.filter(valuta__id=valyuta_id)
+        chiqimlar = chiqimlar.filter(valuta__id=valyuta_id)
 
-    if selected_summa_type:
-        filtered_kirimlar = filtered_kirimlar.filter(summa_type=selected_summa_type)
-        filtered_chiqimlar = filtered_chiqimlar.filter(summa_type=selected_summa_type) 
-
-    if selected_kimdan_id:
-        try:
-            selected_kimdan_obj = Kimdan.objects.get(id=selected_kimdan_id, user=request.user)
-            filtered_kirimlar = filtered_kirimlar.filter(kimdan=selected_kimdan_obj)
-        except Kimdan.DoesNotExist:
-            messages.warning(request, "Tanlangan 'Qayerdan' manbasi topilmadi.")
-            selected_kimdan_obj = None
-            
-
-    jami_kirim = filtered_kirimlar.aggregate(total=Sum('summa'))['total'] or Decimal(0)
-    jami_chiqim = filtered_chiqimlar.aggregate(total=Sum('summa'))['total'] or Decimal(0)
+    jami_kirim = kirimlar.aggregate(Sum('summa'))['summa__sum'] or 0
+    jami_chiqim = chiqimlar.aggregate(Sum('summa'))['summa__sum'] or 0
     balans = jami_kirim - jami_chiqim
 
+    valuta = None
+    if valyuta_id:
+        valuta = Valyuta.objects.filter(id=valyuta_id).first()
+
     context = {
-        'kirimlar': filtered_kirimlar.order_by('-sana')[:10], 
-        'chiqimlar': filtered_chiqimlar.order_by('-sana')[:10], 
+        'valyutalar': valyutalar,
         'jami_kirim': jami_kirim,
         'jami_chiqim': jami_chiqim,
         'balans': balans,
-
-        'valyutalar': all_valyutalar,
-        'kimdan_choices': kimdan_options,
-        
-        'valuta': selected_valuta_obj, 
-
-        'form': { 
-            'start_date': start_date.strftime('%Y-%m-%d') if start_date else '',
-            'end_date': end_date.strftime('%Y-%m-%d') if end_date else '',
-            'valuta': selected_valuta_id, 
-            'summa_type': selected_summa_type, 
-            'kimdan': selected_kimdan_id, 
-        },
+        'valuta': valuta,
+        'kirimlar': kirimlar,
+        'chiqimlar': chiqimlar,
     }
     return render(request, 'transactions/hisob.html', context)
 
-    
+
+
+
 @login_required
 def kirim_qosh(request):
     if not is_user_profile_completed(request.user):
@@ -173,7 +110,7 @@ def chiqim_qosh(request):
             chiqim = form.save(commit=False)
             chiqim.user = request.user
             chiqim.save()
-            messages.success(request, "Chiqim muvaffaqiyatli qo‘shildi!")
+            messages.success(request, "Chiqim muvaffaqiyatli qo'shildi!")
             return redirect('transactions:hisob')
         else:
             messages.error(request, "Formada xatolik bor.")

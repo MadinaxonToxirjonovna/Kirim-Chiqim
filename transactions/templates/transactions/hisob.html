@@ -101,53 +101,7 @@
         <a href="{% url 'main:index' %}" class="btn btn-glass mt-3">🏠 {% trans "Bosh sahifa" %}</a>
     </div>
 
-    <div class="glass-card">
-        <form method="get" action="{% url 'transactions:hisob' %}" class="row g-4 align-items-end">
-
-            <div class="col-md-4">
-                <label for="start_date" class="form-label">{% trans "Boshlanish sanasi" %}</label>
-                <input
-                    id="start_date"
-                    type="date"
-                    class="form-control"
-                    name="start_date"
-                    value="{{ form.start_date.value }}"
-                    required
-                >
-            </div>
-
-            <div class="col-md-4">
-                <label for="end_date" class="form-label">{% trans "Tugash sanasi" %}</label>
-                <input
-                    id="end_date"
-                    type="date"
-                    class="form-control"
-                    name="end_date"
-                    value="{{ form.end_date.value }}"
-                    required
-                >
-            </div>
-
-            <div class="col-md-4">
-                <label for="valuta" class="form-label">{% trans "Valyuta" %}</label>
-                <select
-                    id="valuta"
-                    name="valuta"
-                    class="form-select"
-                    required
-                >
-                    <option value="" disabled {% if not request.GET.valuta %}selected{% endif %}>{% trans "Tanlang" %}</option>
-                    {% for v in valyutalar %}
-                        <option value="{{ v.id }}" {% if request.GET.valuta == v.id|stringformat:"s" %}selected{% endif %}>{{ v.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <div class="col-12 text-center mt-3">
-                <button type="submit" class="btn btn-glass px-5">{% trans "Filtrlash" %}</button>
-            </div>
-        </form>
-    </div>
+   
 
     <div class="row text-center mb-4">
         <div class="col-md-4">
@@ -165,8 +119,8 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h5 class="mb-0">📥 {% trans "Kirimlar" %}</h5>
             <div>
-                <a href="{% url 'transactions:kirim' %}" class="btn btn-glass btn-sm">{% trans "Ko'rish" %}</a>
-                <a href="{% url 'transactions:kirim_qosh' %}" class="btn btn-glass btn-sm">+{% trans "Qo'shish" %}</a>
+                <a href="{% url 'transactions:kirim' %}" class="btn btn-glass btn-sm">{% trans "Ko‘rish" %}</a>
+                <a href="{% url 'transactions:kirim_qosh' %}" class="btn btn-glass btn-sm">+ {% trans "Qo‘shish" %}</a>
             </div>
         </div>
         <div class="table-responsive">

@@ -37,21 +37,16 @@ class KirimForm(forms.ModelForm):
 class ChiqimForm(forms.ModelForm):
     class Meta:
         model = Chiqim
-        fields = ['uchun', 'sana', 'summa', 'summa_type', 'valuta', 'izoh']
-        widgets = {
-            'sana': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'summa': forms.NumberInput(attrs={'step': '0.01', 'class': 'form-control'}),
-            'summa_type': forms.Select(attrs={'class': 'form-select'}),
-            'valuta': forms.Select(attrs={'class': 'form-select'}),
-            'uchun': forms.Select(attrs={'class': 'form-select'}),
-            'izoh': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-        }
+        fields = ['uchun', 'sana', 'summa', 'summa_type', 'uchun', 'valuta', 'izoh']
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user') 
+        user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
-        self.fields['uchun'].queryset = Uchun.objects.filter(user=user)
-        self.fields['valuta'].queryset = Valyuta.objects.filter(user=user)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+
 
 
 class ValyutaForm(forms.ModelForm):
