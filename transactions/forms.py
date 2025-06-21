@@ -1,52 +1,45 @@
 from django import forms
+
 from transactions.models import Chiqim, Kirim, Valyuta, Uchun, Kimdan
-from .models import Kirim, Kimdan, Valyuta 
-from django.forms.widgets import DateInput
+
 
 class HisobFilterForm(forms.Form):
     start_date = forms.DateField(widget=forms.SelectDateWidget(), required=False)
     end_date = forms.DateField(widget=forms.SelectDateWidget(), required=False)
 
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None) 
-        super().__init__(*args, **kwargs)
+
 
 class KirimForm(forms.ModelForm):
     class Meta:
         model = Kirim
-        fields = ['sana', 'summa', 'kimdan', 'valuta', 'izoh']
+        fields = ['kimdan', 'sana', 'summa', 'summa_type', 'valuta', 'izoh']
         widgets = {
-            'sana': DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'summa': forms.NumberInput(attrs={'step': '0.01', 'class': 'form-control', 'placeholder': 'Miqdor kiriting'}),
-            'kimdan': forms.Select(attrs={'class': 'form-select'}),
-            'valuta': forms.Select(attrs={'class': 'form-select'}),
-            'izoh': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': 'Qo‘shimcha ma’lumot yozing...'}),
+            'summa': forms.NumberInput(attrs={'step': '0.01'}),
+            'sana': forms.DateInput(attrs={'type': 'date'}),
         }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        if user:
-            self.fields['kimdan'].queryset = Kimdan.objects.filter(user=user)
-            self.fields['valuta'].queryset = Valyuta.objects.filter(user=user)
-        else:
-            self.fields['kimdan'].queryset = Kimdan.objects.none()
-            self.fields['valuta'].queryset = Valyuta.objects.none()
+        self.fields['kimdan'].queryset = Kimdan.objects.filter(user=user)
+        self.fields['valuta'].queryset = Valyuta.objects.filter(user=user)
 
 
 class ChiqimForm(forms.ModelForm):
     class Meta:
         model = Chiqim
-        fields = ['uchun', 'sana', 'summa', 'summa_type', 'uchun', 'valuta', 'izoh']
+        fields = ['uchun', 'sana', 'summa', 'summa_type', 'valuta', 'izoh']
+        widgets = {
+            'summa': forms.NumberInput(attrs={'step': '0.01'}),
+            'sana': forms.DateInput(attrs={'type': 'date'}),
+
+        }
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
+        user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
-
-
-
+        self.fields['uchun'].queryset = Uchun.objects.filter(user=user)
+        self.fields['valuta'].queryset = Valyuta.objects.filter(user=user)
 
 
 class ValyutaForm(forms.ModelForm):
@@ -67,7 +60,7 @@ class KimdanForm(forms.ModelForm):
         fields = ['nomi', ]
 
 
-class ValyutaKursiForm(forms.Form):
+class ValyutaKursForm(forms.Form):
     asosiy_valyuta = forms.ModelChoiceField(queryset=Valyuta.objects.none(), label="Asosiy valyuta")
 
     def __init__(self, *args, **kwargs):

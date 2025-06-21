@@ -87,6 +87,10 @@ msgstr "Добавить валюту"
 msgid "Kategoriya qo‘shish"
 msgstr "Добавить категорию"
 
+msgid "Valyutalar kesimida (faqat sana bo'yicha filterlash mumkin)"
+msgstr "По валютам (фильтрация возможна только по дате)"
+
+
 #: templates/your_template.html:7
 msgid "Orqaga"
 msgstr "Назад"
@@ -420,3 +424,9 @@ msgstr "Фото профиля"
 
 msgid "Yangilash"
 msgstr "Обновить"
+
+msgid "Mixed currencies. Go to the 'Currency Calculation' section for calculation."
+msgstr "Смешанные валюты. Перейдите в раздел 'Расчет валюты' для вычислений."
+
+msgid "boshqa valyutadagi hisobotni ko'rish uchun filterlashdan foydalaning"
+msgstr "используйте фильтрацию, чтобы просмотреть отчёт в другой валюте"

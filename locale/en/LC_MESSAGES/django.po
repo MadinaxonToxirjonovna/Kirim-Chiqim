@@ -356,3 +356,9 @@ msgstr "Profile Picture"
 
 msgid "Yangilash"
 msgstr "Update"
+
+msgid "Aralash valyutalar. Hisoblash uchun 'Valyuta hisoblash' bo‘limiga o‘ting."
+msgstr "Mixed currencies. Go to the 'Currency Calculation' section for calculation."
+
+msgid "Valyutalar kesimida (faqat sana bo'yicha filterlash mumkin)"
+msgstr "By currency (only date-based filtering is allowed)"

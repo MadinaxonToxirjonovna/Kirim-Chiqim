@@ -11,19 +11,25 @@ from django.contrib import messages
 @login_required
 def profil(request):
     pr = Profil.objects.filter(user=request.user).first()
-    if not pr or not pr.is_login:
+    if not pr.is_login:
         return redirect('profil:login')
-    return render(request, 'profile.html', {'profil': pr})
+    profil = Profil.objects.filter(user=request.user).first()
+    return render(request, 'profile.html', {'profil': profil})
 
 
 @login_required
 def tahrirlash(request):
     pr = Profil.objects.filter(user=request.user).first()
-    if not pr or not pr.is_login:
+    if not pr.is_login:
         return redirect('profil:login')
+    try:
+        profil = Profil.objects.filter(user=request.user).first()
+    except Profil.DoesNotExist:
+        messages.error(request, "Profil topilmadi")
+        return
 
     if request.method == 'POST':
-        form = ProfilForm(request.POST, request.FILES, instance=pr)
+        form = ProfilForm(request.POST, request.FILES, instance=profil)
         if form.is_valid():
             form.save()
             messages.success(request, "Profil muvaffaqiyatli yangilandi.")
@@ -31,7 +37,7 @@ def tahrirlash(request):
         else:
             messages.error(request, "Profilni yangilashda xatolik yuz berdi.")
     else:
-        form = ProfilForm(instance=pr)
+        form = ProfilForm(instance=profil)
 
     return render(request, 'tahrir.html', {'form': form})
 
@@ -51,9 +57,9 @@ def register_view(request):
 
             if user.email:
                 send_code(user.email, kod)
-                messages.success(request, "Tasdiqlash kodi emailingizga yuborildi.")
+                messages.success(request, f"Tasdiqlash kodi emailingizga yuborildi. {kod}")
             elif profil.telefon:
-                messages.success(request, "Tasdiqlash kodi telefoningizga yuborildi.")
+                messages.success(request, "Tasdiqlash kodi telefoningizga yuborildi .")
             else:
                 messages.warning(request, "Tasdiqlash kodi yuborilmadi: email yoki telefon topilmadi.")
 
@@ -72,15 +78,15 @@ def send_code(user_email, code):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        username = request.POST['username']
+        password = request.POST['password']
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
 
             code = generate_verification_code()
-            profil, created = Profil.objects.get_or_create(user=user)
+            profil = Profil.objects.filter(user=user).first()
             profil.tasdiqla_kod = code
             profil.save()
 
@@ -88,12 +94,11 @@ def login_view(request):
                 send_code(user.email, code)
             elif profil.telefon:
                 print(f"Telefon uchun kod: {code}")
-                messages.success(request, f'Login muvaffaqiyatli. Tasdiqlash kodi yuborildi! {code}')
-            else:
-                messages.warning(request, 'Kod yuborilmadi: Email va telefon mavjud emas.')
+
+            messages.success(request, f'Login muvaffaqiyatli. Tasdiqlash kodi yuborildi!')
             return redirect('profil:verify')
         else:
-            messages.error(request, 'Login yoki parol notogri!')
+            messages.error(request, f'Login yoki parol noto‘g‘ri!')
     return render(request, 'login.html')
 
 
@@ -102,14 +107,10 @@ def verify_view(request):
         kod = request.POST.get('kod')
         profil = Profil.objects.filter(user=request.user).order_by('-kod_vaqt').first()
 
-        if not profil:
-            messages.error(request, "Profil topilmadi.")
-            return redirect('profil:login')
-
         if profil.tasdiqla_kod == kod:
+            messages.success(request, "Tasdiqlash muvaffaqiyatli.")
             profil.is_login = True
             profil.save()
-            messages.success(request, "Tasdiqlash muvaffaqiyatli.")
             return redirect('profil:profil')
         else:
             messages.error(request, "Kod noto‘g‘ri.")
@@ -123,18 +124,17 @@ def logout_view(request):
         pr.is_login = False
         pr.save()
     logout(request)
-    return redirect('profil:login')
-
+    return redirect('profil:login') 
 
 @login_required
 def complete_profile(request):
-    profil, created = Profil.objects.get_or_create(user=request.user)
-
+    profil = Profil.objects.get(user=request.user)
+    
     if request.method == 'POST':
         form = ProfilForm(request.POST, request.FILES, instance=profil)
         if form.is_valid():
             profil = form.save(commit=False)
-            profil.is_profile_completed = True
+            profil.is_profile_completed = True 
             profil.save()
             return redirect('profil:profil')
     else:

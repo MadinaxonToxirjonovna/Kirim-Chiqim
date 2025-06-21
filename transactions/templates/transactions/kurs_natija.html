@@ -1,0 +1,73 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Kurs Natijasi" %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen p-6">
+    <div class="max-w-6xl mx-auto space-y-8">
+
+        <div class="bg-gray-800 rounded-xl shadow-lg p-6">
+            <h2 class="text-3xl font-bold text-blue-400 mb-6 text-center">{% trans "Umumiy Hisobot" %} ({{ asosiy.short }})</h2>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto text-sm text-gray-300">
+                    <thead class="bg-gray-700 text-xs uppercase">
+                        <tr>
+                            <th class="px-4 py-3 text-left">{% trans "Valyuta" %}</th>
+                            <th class="px-4 py-3 text-left">{% trans "Kurs" %}</th>
+                            <th class="px-4 py-3 text-left">{% trans "Kirim (valyutada)" %}</th>
+                            <th class="px-4 py-3 text-left">{% trans "Chiqim (valyutada)" %}</th>
+                            <th class="px-4 py-3 text-left">{% trans "Kirim" %} ({{ asosiy.short }})</th>
+                            <th class="px-4 py-3 text-left">{% trans "Chiqim" %} ({{ asosiy.short }})</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        {% for item in kurslar_qiymatlari %}
+                        <tr class="hover:bg-gray-700">
+                            <td class="px-4 py-2">{{ item.valyuta.nom }} ({{ item.valyuta.short }})</td>
+                            <td class="px-4 py-2">1 {{ item.valyuta.short }} = {{ item.kurs }} {{ asosiy.short }}</td>
+                            <td class="px-4 py-2 text-green-400">{{ item.kirim }}</td>
+                            <td class="px-4 py-2 text-red-400">{{ item.chiqim }}</td>
+                            <td class="px-4 py-2 text-green-400">{{ item.kirim_asosiy }}</td>
+                            <td class="px-4 py-2 text-red-400">{{ item.chiqim_asosiy }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-gray-700 mt-6 p-4 rounded-lg space-y-2">
+                <p>
+                    <strong class="text-blue-300">{% trans "Jami kirim" %}:</strong>
+                    <a href="{% url 'transactions:kirim' %}" class="text-green-400 hover:underline">{{ jami_kirim }}</a> {{ asosiy.short }}
+                </p>
+                <p>
+                    <strong class="text-blue-300">{% trans "Jami chiqim" %}:</strong>
+                    <a href="{% url 'transactions:chiqim' %}" class="text-red-400 hover:underline">{{ jami_chiqim }}</a> {{ asosiy.short }}
+                </p>
+                <p>
+                    <strong class="text-blue-300">{% trans "Balans" %}:</strong>
+                    {% if balans > 0 %}
+                        <span class="text-blue-400 font-bold">{{ balans }}</span>
+                    {% elif balans < 0 %}
+                        <span class="text-red-400 font-bold">{{ balans }}</span>
+                    {% else %}
+                        <span class="text-gray-200 font-bold">{{ balans }}</span>
+                    {% endif %} {{ asosiy.short }}
+                </p>
+            </div>
+
+            <div class="mt-6 text-right">
+                <a href="{% url 'transactions:hisob' %}" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg shadow-md transition duration-300">
+                    ⬅️ {% trans "Orqaga" %}
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
